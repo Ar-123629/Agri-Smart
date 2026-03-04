@@ -1,0 +1,1713 @@
+git <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AgriSmart - Smart Agriculture System</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Base Styles */
+        :root {
+            --primary: #2e7d32;
+            --primary-dark: #1b5e20;
+            --primary-light: #4caf50;
+            --secondary: #ff9800;
+            --light: #f5f5f5;
+            --dark: #333;
+            --gray: #757575;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f9f9f9;
+            color: var(--dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+        
+        .btn:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        .btn-secondary {
+            background-color: var(--secondary);
+        }
+        
+        .btn-secondary:hover {
+            background-color: #e68900;
+        }
+        
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+        }
+        
+        .btn-outline:hover {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        section {
+            padding: 80px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .section-title h2 {
+            font-size: 36px;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+        
+        .section-title p {
+            font-size: 18px;
+            color: var(--gray);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo i {
+            font-size: 28px;
+            color: var(--primary);
+            margin-right: 10px;
+        }
+        
+        .logo h1 {
+            font-size: 24px;
+            color: var(--primary);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 25px;
+        }
+        
+        nav ul li a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            transition: color 0.3s ease;
+            padding: 5px 0;
+            position: relative;
+        }
+        
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary);
+            transition: width 0.3s ease;
+        }
+        
+        nav ul li a:hover::after,
+        nav ul li a.active::after {
+            width: 100%;
+        }
+        
+        nav ul li a:hover,
+        nav ul li a.active {
+            color: var(--primary);
+        }
+        
+        .auth-buttons {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .auth-buttons .btn {
+            padding: 8px 16px;
+            font-size: 14px;
+        }
+        
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--primary);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+        
+        .cart-icon {
+            position: relative;
+            cursor: pointer;
+        }
+        
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background-color: var(--secondary);
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: bold;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1500382017468-9049fed747ef?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1632&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
+            padding: 150px 0;
+        }
+        
+        .hero h2 {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+        
+        .hero p {
+            font-size: 20px;
+            max-width: 700px;
+            margin: 0 auto 30px;
+        }
+        
+        /* Features Section */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+        
+        .feature-card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .feature-card i {
+            font-size: 48px;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+        
+        .feature-card h3 {
+            font-size: 22px;
+            margin-bottom: 15px;
+        }
+        
+        /* Virtual Pages */
+        .virtual-page {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        .virtual-page.active {
+            display: block;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        /* Services Section */
+        .services {
+            background-color: var(--light);
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .service-card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .service-img {
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .service-content {
+            padding: 25px;
+        }
+        
+        .service-content h3 {
+            font-size: 22px;
+            margin-bottom: 15px;
+            color: var(--primary);
+        }
+        
+        /* Workers Section */
+        .workers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+        }
+        
+        .worker-card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease;
+        }
+        
+        .worker-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .worker-img {
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .worker-content {
+            padding: 20px;
+        }
+        
+        .worker-content h3 {
+            font-size: 20px;
+            margin-bottom: 10px;
+            color: var(--primary);
+        }
+        
+        .worker-specialty {
+            display: inline-block;
+            background-color: var(--light);
+            color: var(--primary);
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+        
+        .worker-rating {
+            color: var(--secondary);
+            margin-bottom: 10px;
+        }
+        
+        /* Marketplace Section */
+        .marketplace-filters {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .filter-btn {
+            padding: 8px 16px;
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .filter-btn.active, .filter-btn:hover {
+            background-color: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+        
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 25px;
+        }
+        
+        .product-card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .product-img {
+            height: 180px;
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .product-content {
+            padding: 20px;
+        }
+        
+        .product-content h3 {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+        
+        .product-price {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+        
+        /* Cart Section */
+        .cart-page {
+            background-color: var(--light);
+        }
+        
+        .cart-container {
+            background-color: white;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        
+        .cart-items {
+            margin-bottom: 30px;
+        }
+        
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .cart-item:last-child {
+            border-bottom: none;
+        }
+        
+        .cart-item-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            flex: 1;
+        }
+        
+        .cart-item-image {
+            width: 80px;
+            height: 80px;
+            background-size: cover;
+            background-position: center;
+            border-radius: 8px;
+        }
+        
+        .cart-item-details h4 {
+            margin-bottom: 5px;
+            color: var(--primary);
+        }
+        
+        .cart-item-price {
+            font-weight: 600;
+            color: var(--primary);
+        }
+        
+        .cart-item-controls {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .quantity-controls {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .quantity-btn {
+            width: 30px;
+            height: 30px;
+            border: 1px solid #ddd;
+            background: white;
+            border-radius: 4px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .quantity-btn:hover {
+            background-color: var(--light);
+        }
+        
+        .quantity-display {
+            min-width: 40px;
+            text-align: center;
+            font-weight: 600;
+        }
+        
+        .cart-summary {
+            background-color: var(--light);
+            padding: 25px;
+            border-radius: 8px;
+            margin-top: 30px;
+        }
+        
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+        }
+        
+        .summary-total {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--primary);
+            border-top: 2px solid #ddd;
+            padding-top: 15px;
+            margin-top: 15px;
+        }
+        
+        .empty-cart {
+            text-align: center;
+            padding: 60px 20px;
+        }
+        
+        .empty-cart i {
+            font-size: 64px;
+            color: var(--gray);
+            margin-bottom: 20px;
+        }
+        
+        .empty-cart h3 {
+            color: var(--gray);
+            margin-bottom: 15px;
+        }
+        
+        /* Learning Section */
+        .learning-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .learning-card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .learning-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .learning-img {
+            height: 180px;
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .learning-content {
+            padding: 25px;
+        }
+        
+        .learning-content h3 {
+            font-size: 20px;
+            margin-bottom: 10px;
+            color: var(--primary);
+        }
+        
+        .learning-meta {
+            display: flex;
+            justify-content: space-between;
+            color: var(--gray);
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+        
+        /* Product Growth Section */
+        .growth-detail {
+            background-color: white;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            margin-bottom: 30px;
+        }
+        
+        .growth-header {
+            display: flex;
+            margin-bottom: 30px;
+        }
+        
+        .growth-image {
+            flex: 1;
+            max-width: 400px;
+            height: 300px;
+            background-size: cover;
+            background-position: center;
+            border-radius: 8px;
+        }
+        
+        .growth-meta {
+            flex: 1;
+            padding: 0 30px;
+        }
+        
+        .growth-meta h2 {
+            font-size: 28px;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+        
+        .meta-item {
+            margin-bottom: 15px;
+        }
+        
+        .meta-item h4 {
+            font-size: 16px;
+            color: var(--gray);
+            margin-bottom: 5px;
+        }
+        
+        .growth-stages {
+            margin-top: 30px;
+        }
+        
+        .stage {
+            display: flex;
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .stage:last-child {
+            border-bottom: none;
+        }
+        
+        .stage-icon {
+            font-size: 24px;
+            color: var(--primary);
+            margin-right: 15px;
+        }
+        
+        .stage-content h4 {
+            font-size: 18px;
+            margin-bottom: 8px;
+        }
+        
+        /* Notification */
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 15px 20px;
+            background-color: var(--primary);
+            color: white;
+            border-radius: 4px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            z-index: 2000;
+            transform: translateX(150%);
+            transition: transform 0.3s ease;
+        }
+        
+        .notification.show {
+            transform: translateX(0);
+        }
+        
+        .notification.error {
+            background-color: #f44336;
+        }
+        
+        .notification.success {
+            background-color: var(--primary);
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 60px 0 30px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-column h3 {
+            font-size: 20px;
+            margin-bottom: 20px;
+            color: var(--primary-light);
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-column ul li a {
+            color: #bbb;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-column ul li a:hover {
+            color: white;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            background-color: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            color: white;
+            transition: background-color 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            background-color: var(--primary);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: #bbb;
+            font-size: 14px;
+        }
+        
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            z-index: 1100;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .modal-content {
+            background-color: white;
+            border-radius: 8px;
+            width: 90%;
+            max-width: 500px;
+            padding: 30px;
+            position: relative;
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--gray);
+        }
+        
+        .modal h2 {
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                padding: 15px 0;
+            }
+            
+            nav ul {
+                margin: 15px 0;
+            }
+            
+            nav ul li {
+                margin: 0 10px;
+            }
+            
+            .hero h2 {
+                font-size: 36px;
+            }
+            
+            .hero p {
+                font-size: 18px;
+            }
+            
+            section {
+                padding: 60px 0;
+            }
+            
+            .growth-header {
+                flex-direction: column;
+            }
+            
+            .growth-image {
+                max-width: 100%;
+                margin-bottom: 20px;
+            }
+            
+            .cart-item {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+            
+            .cart-item-controls {
+                width: 100%;
+                justify-content: space-between;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .hero {
+                padding: 100px 0;
+            }
+            
+            .hero h2 {
+                font-size: 28px;
+            }
+            
+            .section-title h2 {
+                font-size: 28px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Notification System -->
+    <div id="notification" class="notification"></div>
+
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <i class="fas fa-seedling"></i>
+                <h1>AgriSmart</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#" class="nav-link active" data-page="home">Home</a></li>
+                    <li><a href="#" class="nav-link" data-page="services">Services</a></li>
+                    <li><a href="#" class="nav-link" data-page="marketplace">Marketplace</a></li>
+                    <li><a href="#" class="nav-link" data-page="learning">Learning</a></li>
+                    <li><a href="#" class="nav-link" data-page="cart">Cart</a></li>
+                    <li><a href="#" class="nav-link" data-page="about">About</a></li>
+                    <li><a href="#" class="nav-link" data-page="contact">Contact</a></li>
+                </ul>
+            </nav>
+            <div class="auth-buttons">
+                <button class="btn" id="loginBtn">Login</button>
+                <button class="btn btn-secondary" id="registerBtn">Register</button>
+                <div class="cart-icon" id="cartIcon" data-page="cart">
+                    <i class="fas fa-shopping-cart fa-lg"></i>
+                    <div class="cart-count" id="cartCount">0</div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Virtual Pages -->
+    <main>
+        <!-- Home Page -->
+        <section class="virtual-page active" id="home-page">
+            <!-- Hero Section -->
+            <div class="hero">
+                <div class="container">
+                    <h2>Smart Agriculture for Modern Farmers</h2>
+                    <p>Connect with agricultural workers, learn modern farming techniques, and buy/sell products and tools in one platform.</p>
+                    <a href="#" class="btn" data-page="services">Explore Services</a>
+                    <a href="#" class="btn btn-secondary" data-page="marketplace">Visit Marketplace</a>
+                </div>
+            </div>
+
+            <!-- Features Section -->
+            <section>
+                <div class="container">
+                    <div class="section-title">
+                        <h2>Our Key Features</h2>
+                        <p>AgriSmart provides comprehensive solutions for all your farming needs</p>
+                    </div>
+                    <div class="features-grid">
+                        <div class="feature-card" data-page="services">
+                            <i class="fas fa-users"></i>
+                            <h3>Worker Connection</h3>
+                            <p>Connect with registered agricultural workers for your farming needs</p>
+                        </div>
+                        <div class="feature-card" data-page="learning">
+                            <i class="fas fa-graduation-cap"></i>
+                            <h3>Learning Resources</h3>
+                            <p>Access educational content on modern farming techniques</p>
+                        </div>
+                        <div class="feature-card" data-page="marketplace">
+                            <i class="fas fa-shopping-cart"></i>
+                            <h3>Marketplace</h3>
+                            <p>Buy and sell agricultural products and smart tools</p>
+                        </div>
+                        <div class="feature-card" data-page="services">
+                            <i class="fas fa-tools"></i>
+                            <h3>Smart Tools</h3>
+                            <p>Discover innovative tools to enhance your farming efficiency</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </section>
+
+        <!-- Services Page -->
+        <section class="virtual-page" id="services-page">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Our Services</h2>
+                    <p>Comprehensive agricultural services tailored for modern farmers</p>
+                </div>
+                <div class="services-grid">
+                    <div class="service-card">
+                        <div class="service-img" style="background-image: url('https://images.unsplash.com/photo-1586771107445-d3ca888129fe?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1471&q=80');"></div>
+                        <div class="service-content">
+                            <h3>Worker Matching</h3>
+                            <p>Find skilled agricultural workers based on your specific requirements and location.</p>
+                            <a href="#" class="btn" style="margin-top: 15px;">Find Workers</a>
+                        </div>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-img" style="background-image: url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80');"></div>
+                        <div class="service-content">
+                            <h3>Smart Tools Store</h3>
+                            <p>Browse and purchase the latest smart farming tools and equipment.</p>
+                            <a href="#" class="btn" style="margin-top: 15px;">Shop Tools</a>
+                        </div>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-img" style="background-image: url('https://images.unsplash.com/photo-1586773860418-d37222d8fce3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1473&q=80');"></div>
+                        <div class="service-content">
+                            <h3>Learning Center</h3>
+                            <p>Access tutorials, guides, and courses to improve your farming knowledge.</p>
+                            <a href="#" class="btn" style="margin-top: 15px;">Start Learning</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Workers Section -->
+                <div class="section-title" style="margin-top: 80px;">
+                    <h2>Available Workers</h2>
+                    <p>Connect with skilled agricultural professionals</p>
+                </div>
+                <div class="workers-grid">
+                    <div class="worker-card">
+                        <div class="worker-img" style="background-image: url('https://images.unsplash.com/photo-1586773860418-d37222d8fce3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1473&q=80');"></div>
+                        <div class="worker-content">
+                            <h3>Rajesh Kumar</h3>
+                            <span class="worker-specialty">Organic Farming</span>
+                            <div class="worker-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                                <span>(4.5)</span>
+                            </div>
+                            <p>Specialized in organic farming with 10+ years of experience.</p>
+                            <button class="btn" style="margin-top: 10px;">Contact</button>
+                        </div>
+                    </div>
+                    <div class="worker-card">
+                        <div class="worker-img" style="background-image: url('https://images.unsplash.com/photo-1552053831-71594a27632d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=662&q=80');"></div>
+                        <div class="worker-content">
+                            <h3>Priya Sharma</h3>
+                            <span class="worker-specialty">Irrigation Systems</span>
+                            <div class="worker-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <span>(5.0)</span>
+                            </div>
+                            <p>Expert in modern irrigation systems and water management.</p>
+                            <button class="btn" style="margin-top: 10px;">Contact</button>
+                        </div>
+                    </div>
+                    <div class="worker-card">
+                        <div class="worker-img" style="background-image: url('https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80');"></div>
+                        <div class="worker-content">
+                            <h3>Amit Patel</h3>
+                            <span class="worker-specialty">Soil Management</span>
+                            <div class="worker-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="far fa-star"></i>
+                                <span>(4.0)</span>
+                            </div>
+                            <p>Specialized in soil health and nutrient management.</p>
+                            <button class="btn" style="margin-top: 10px;">Contact</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Marketplace Page -->
+        <section class="virtual-page" id="marketplace-page">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Marketplace</h2>
+                    <p>Buy and sell agricultural products and tools</p>
+                </div>
+                <div class="marketplace-filters">
+                    <button class="filter-btn active" data-filter="all">All Products</button>
+                    <button class="filter-btn" data-filter="fruits">Fruits</button>
+                    <button class="filter-btn" data-filter="vegetables">Vegetables</button>
+                    <button class="filter-btn" data-filter="tools">Farm Tools</button>
+                    <button class="filter-btn" data-filter="seeds">Seeds</button>
+                    <button class="filter-btn" data-filter="services">Agro Services</button>
+                </div>
+                <div class="products-grid">
+                    <div class="product-card" data-category="fruits">
+                        <div class="product-img" style="background-image: url('https://images.unsplash.com/photo-1574856344991-aaa31b6f4ce3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1469&q=80');"></div>
+                        <div class="product-content">
+                            <h3>Organic Tomatoes</h3>
+                            <p>Fresh, pesticide-free tomatoes from local farms</p>
+                            <div class="product-price">$3.99/kg</div>
+                            <button class="btn add-to-cart" data-product='{"id":1,"name":"Organic Tomatoes","price":3.99,"image":"https://images.unsplash.com/photo-1574856344991-aaa31b6f4ce3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1469&q=80","category":"fruits"}'>Add to Cart</button>
+                        </div>
+                    </div>
+                    <div class="product-card" data-category="vegetables">
+                        <div class="product-img" style="background-image: url('https://images.unsplash.com/photo-1594282486535-96a8cc12d72b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80');"></div>
+                        <div class="product-content">
+                            <h3>Fresh Carrots</h3>
+                            <p>Organic carrots packed with nutrients</p>
+                            <div class="product-price">$2.49/kg</div>
+                            <button class="btn add-to-cart" data-product='{"id":2,"name":"Fresh Carrots","price":2.49,"image":"https://images.unsplash.com/photo-1594282486535-96a8cc12d72b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80","category":"vegetables"}'>Add to Cart</button>
+                        </div>
+                    </div>
+                    <div class="product-card" data-category="tools">
+                        <div class="product-img" style="background-image: url('https://images.unsplash.com/photo-1628624740787-3005d84efd85?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80');"></div>
+                        <div class="product-content">
+                            <h3>Smart Irrigation System</h3>
+                            <p>Automated watering system with soil moisture sensors</p>
+                            <div class="product-price">$249.99</div>
+                            <button class="btn add-to-cart" data-product='{"id":3,"name":"Smart Irrigation System","price":249.99,"image":"https://images.unsplash.com/photo-1628624740787-3005d84efd85?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80","category":"tools"}'>Add to Cart</button>
+                        </div>
+                    </div>
+                    <div class="product-card" data-category="tools">
+                        <div class="product-img" style="background-image: url('https://images.unsplash.com/photo-1595231776515-9e35b3f8efdf?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1469&q=80');"></div>
+                        <div class="product-content">
+                            <h3>Soil Testing Kit</h3>
+                            <p>Digital soil analyzer for pH and nutrient levels</p>
+                            <div class="product-price">$89.99</div>
+                            <button class="btn add-to-cart" data-product='{"id":4,"name":"Soil Testing Kit","price":89.99,"image":"https://images.unsplash.com/photo-1595231776515-9e35b3f8efdf?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1469&q=80","category":"tools"}'>Add to Cart</button>
+                        </div>
+                    </div>
+                    <div class="product-card" data-category="seeds">
+                        <div class="product-img" style="background-image: url('https://images.unsplash.com/photo-1597848212624-e6d4bd66e531?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80');"></div>
+                        <div class="product-content">
+                            <h3>Heirloom Seed Pack</h3>
+                            <p>Collection of 10 non-GMO vegetable seeds</p>
+                            <div class="product-price">$12.99</div>
+                            <button class="btn add-to-cart" data-product='{"id":5,"name":"Heirloom Seed Pack","price":12.99,"image":"https://images.unsplash.com/photo-1597848212624-e6d4bd66e531?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80","category":"seeds"}'>Add to Cart</button>
+                        </div>
+                    </div>
+                    <div class="product-card" data-category="services">
+                        <div class="product-img" style="background-image: url('https://images.unsplash.com/photo-1589923188651-268a35c0d0bf?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80');"></div>
+                        <div class="product-content">
+                            <h3>Soil Analysis Service</h3>
+                            <p>Professional soil testing and recommendations</p>
+                            <div class="product-price">$49.99</div>
+                            <button class="btn add-to-cart" data-product='{"id":6,"name":"Soil Analysis Service","price":49.99,"image":"https://images.unsplash.com/photo-1589923188651-268a35c0d0bf?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80","category":"services"}'>Book Service</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Cart Page -->
+        <section class="virtual-page cart-page" id="cart-page">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Shopping Cart</h2>
+                    <p>Review your items before checkout</p>
+                </div>
+                <div class="cart-container">
+                    <div class="cart-items" id="cartItems">
+                        <!-- Cart items will be loaded here dynamically -->
+                    </div>
+                    
+                    <div class="cart-summary">
+                        <div class="summary-row">
+                            <span>Subtotal:</span>
+                            <span id="subtotal">$0.00</span>
+                        </div>
+                        <div class="summary-row">
+                            <span>Shipping:</span>
+                            <span id="shipping">$5.00</span>
+                        </div>
+                        <div class="summary-row">
+                            <span>Tax:</span>
+                            <span id="tax">$0.00</span>
+                        </div>
+                        <div class="summary-row summary-total">
+                            <span>Total:</span>
+                            <span id="total">$0.00</span>
+                        </div>
+                        <button class="btn btn-secondary" style="width: 100%; margin-top: 20px;" id="checkoutBtn">Proceed to Checkout</button>
+                        <button class="btn btn-outline" style="width: 100%; margin-top: 10px;" data-page="marketplace">Continue Shopping</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Learning Page -->
+        <section class="virtual-page" id="learning-page">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Learning Center</h2>
+                    <p>Expand your farming knowledge with our educational resources</p>
+                </div>
+                <div class="learning-grid">
+                    <div class="learning-card" data-crop="tomato">
+                        <div class="learning-img" style="background-image: url('https://images.unsplash.com/photo-1592924357228-91a4daadcfea?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80');"></div>
+                        <div class="learning-content">
+                            <h3>Tomato Cultivation</h3>
+                            <div class="learning-meta">
+                                <span><i class="far fa-clock"></i> 60-85 days</span>
+                                <span><i class="fas fa-temperature-high"></i> Warm Season</span>
+                            </div>
+                            <p>Learn complete guide to growing healthy tomatoes from seed to harvest.</p>
+                            <button class="btn" style="margin-top: 15px;">Learn More</button>
+                        </div>
+                    </div>
+                    <div class="learning-card" data-crop="rice">
+                        <div class="learning-img" style="background-image: url('https://images.unsplash.com/photo-1586201375761-83865001e31c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80');"></div>
+                        <div class="learning-content">
+                            <h3>Rice Farming</h3>
+                            <div class="learning-meta">
+                                <span><i class="far fa-clock"></i> 100-120 days</span>
+                                <span><i class="fas fa-tint"></i> Water Intensive</span>
+                            </div>
+                            <p>Traditional and modern techniques for successful rice cultivation.</p>
+                            <button class="btn" style="margin-top: 15px;">Learn More</button>
+                        </div>
+                    </div>
+                    <div class="learning-card" data-crop="wheat">
+                        <div class="learning-img" style="background-image: url('https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1471&q=80');"></div>
+                        <div class="learning-content">
+                            <h3>Wheat Production</h3>
+                            <div class="learning-meta">
+                                <span><i class="far fa-clock"></i> 110-130 days</span>
+                                <span><i class="fas fa-sun"></i> Cool Season</span>
+                            </div>
+                            <p>Best practices for wheat farming, harvesting, and storage.</p>
+                            <button class="btn" style="margin-top: 15px;">Learn More</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Page -->
+        <section class="virtual-page" id="about-page">
+            <div class="container">
+                <div class="section-title">
+                    <h2>About AgriSmart</h2>
+                    <p>Revolutionizing agriculture through technology and community</p>
+                </div>
+                <div style="max-width: 800px; margin: 0 auto;">
+                    <p style="font-size: 18px; margin-bottom: 20px;">AgriSmart is a comprehensive platform designed to empower farmers with modern agricultural solutions. We connect farmers with skilled workers, provide educational resources, and offer a marketplace for agricultural products and tools.</p>
+                    <p style="font-size: 18px; margin-bottom: 20px;">Our mission is to bridge the gap between traditional farming practices and modern technology, making agriculture more efficient, sustainable, and profitable for everyone involved.</p>
+                    <div class="features-grid" style="margin-top: 50px;">
+                        <div class="feature-card">
+                            <i class="fas fa-bullseye"></i>
+                            <h3>Our Mission</h3>
+                            <p>To empower farmers with technology and knowledge for sustainable agriculture</p>
+                        </div>
+                        <div class="feature-card">
+                            <i class="fas fa-eye"></i>
+                            <h3>Our Vision</h3>
+                            <p>A world where technology and tradition work together for food security</p>
+                        </div>
+                        <div class="feature-card">
+                            <i class="fas fa-handshake"></i>
+                            <h3>Our Values</h3>
+                            <p>Sustainability, Innovation, Community, and Empowerment</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Page -->
+        <section class="virtual-page" id="contact-page">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Contact Us</h2>
+                    <p>Get in touch with our agricultural experts</p>
+                </div>
+                <div style="max-width: 600px; margin: 0 auto;">
+                    <div class="form-group">
+                        <label for="contactName">Your Name</label>
+                        <input type="text" id="contactName">
+                    </div>
+                    <div class="form-group">
+                        <label for="contactEmail">Email Address</label>
+                        <input type="email" id="contactEmail">
+                    </div>
+                    <div class="form-group">
+                        <label for="contactSubject">Subject</label>
+                        <input type="text" id="contactSubject">
+                    </div>
+                    <div class="form-group">
+                        <label for="contactMessage">Message</label>
+                        <textarea id="contactMessage" rows="5"></textarea>
+                    </div>
+                    <button class="btn" style="width: 100%;">Send Message</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>AgriSmart</h3>
+                    <p>Connecting farmers with workers, knowledge, and tools for smarter agriculture.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#" class="nav-link" data-page="home">Home</a></li>
+                        <li><a href="#" class="nav-link" data-page="services">Services</a></li>
+                        <li><a href="#" class="nav-link" data-page="marketplace">Marketplace</a></li>
+                        <li><a href="#" class="nav-link" data-page="learning">Learning Center</a></li>
+                        <li><a href="#" class="nav-link" data-page="about">About Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Services</h3>
+                    <ul>
+                        <li><a href="#">Worker Connection</a></li>
+                        <li><a href="#">Smart Tools</a></li>
+                        <li><a href="#">Product Marketplace</a></li>
+                        <li><a href="#">Learning Resources</a></li>
+                        <li><a href="#">Consultation</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contact Us</h3>
+                    <ul>
+                        <li><i class="fas fa-map-marker-alt"></i> 123 Farm Road, Agriculture City</li>
+                        <li><i class="fas fa-phone"></i> +1 234 567 8900</li>
+                        <li><i class="fas fa-envelope"></i> info@agrismart.com</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 AgriSmart. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Login Modal -->
+    <div class="modal" id="loginModal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>Login to Your Account</h2>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="loginEmail">Email Address</label>
+                    <input type="email" id="loginEmail" required>
+                </div>
+                <div class="form-group">
+                    <label for="loginPassword">Password</label>
+                    <input type="password" id="loginPassword" required>
+                </div>
+                <button type="submit" class="btn" style="width: 100%;">Login</button>
+            </form>
+            <p style="text-align: center; margin-top: 15px;">Don't have an account? <a href="#" id="switchToRegister">Register here</a></p>
+        </div>
+    </div>
+
+    <!-- Register Modal -->
+    <div class="modal" id="registerModal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>Create an Account</h2>
+            <form id="registerForm">
+                <div class="form-group">
+                    <label for="registerName">Full Name</label>
+                    <input type="text" id="registerName" required>
+                </div>
+                <div class="form-group">
+                    <label for="registerEmail">Email Address</label>
+                    <input type="email" id="registerEmail" required>
+                </div>
+                <div class="form-group">
+                    <label for="registerPassword">Password</label>
+                    <input type="password" id="registerPassword" required>
+                </div>
+                <div class="form-group">
+                    <label for="registerType">Account Type</label>
+                    <select id="registerType" required>
+                        <option value="">Select Account Type</option>
+                        <option value="farmer">Farmer</option>
+                        <option value="worker">Agricultural Worker</option>
+                        <option value="buyer">Product Buyer</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn" style="width: 100%;">Register</button>
+            </form>
+            <p style="text-align: center; margin-top: 15px;">Already have an account? <a href="#" id="switchToLogin">Login here</a></p>
+        </div>
+    </div>
+
+    <script>
+        // Cart Management System
+        class CartManager {
+            constructor() {
+                this.cart = JSON.parse(localStorage.getItem('agrismart_cart')) || [];
+                this.init();
+            }
+
+            init() {
+                this.updateCartCount();
+                this.setupEventListeners();
+            }
+
+            setupEventListeners() {
+                // Add to cart buttons
+                document.addEventListener('click', (e) => {
+                    if (e.target.classList.contains('add-to-cart')) {
+                        const productData = JSON.parse(e.target.getAttribute('data-product'));
+                        this.addToCart(productData);
+                    }
+                });
+
+                // Cart icon click
+                document.getElementById('cartIcon').addEventListener('click', () => {
+                    this.showCartPage();
+                });
+
+                // Checkout button
+                document.getElementById('checkoutBtn').addEventListener('click', () => {
+                    this.handleCheckout();
+                });
+            }
+
+            addToCart(product) {
+                const existingItem = this.cart.find(item => item.id === product.id);
+                
+                if (existingItem) {
+                    existingItem.quantity += 1;
+                } else {
+                    this.cart.push({
+                        ...product,
+                        quantity: 1
+                    });
+                }
+                
+                this.saveCart();
+                this.showNotification(`${product.name} added to cart!`, 'success');
+            }
+
+            removeFromCart(productId) {
+                this.cart = this.cart.filter(item => item.id !== productId);
+                this.saveCart();
+                this.showNotification('Item removed from cart', 'success');
+                this.renderCart();
+            }
+
+            updateQuantity(productId, newQuantity) {
+                const item = this.cart.find(item => item.id === productId);
+                if (item) {
+                    if (newQuantity <= 0) {
+                        this.removeFromCart(productId);
+                    } else {
+                        item.quantity = newQuantity;
+                        this.saveCart();
+                        this.renderCart();
+                    }
+                }
+            }
+
+            saveCart() {
+                localStorage.setItem('agrismart_cart', JSON.stringify(this.cart));
+                this.updateCartCount();
+            }
+
+            updateCartCount() {
+                const cartCount = document.getElementById('cartCount');
+                const totalItems = this.cart.reduce((sum, item) => sum + item.quantity, 0);
+                cartCount.textContent = totalItems;
+            }
+
+            showCartPage() {
+                // Show cart page
+                document.querySelectorAll('.virtual-page').forEach(page => {
+                    page.classList.remove('active');
+                });
+                document.getElementById('cart-page').classList.add('active');
+
+                // Update nav links
+                document.querySelectorAll('.nav-link').forEach(link => {
+                    link.classList.remove('active');
+                });
+                document.querySelector('.nav-link[data-page="cart"]').classList.add('active');
+
+                // Render cart
+                this.renderCart();
+            }
+
+            renderCart() {
+                const cartItemsContainer = document.getElementById('cartItems');
+                
+                if (this.cart.length === 0) {
+                    cartItemsContainer.innerHTML = `
+                        <div class="empty-cart">
+                            <i class="fas fa-shopping-cart"></i>
+                            <h3>Your cart is empty</h3>
+                            <p>Add some products to get started!</p>
+                            <button class="btn" data-page="marketplace" style="margin-top: 20px;">Browse Products</button>
+                        </div>
+                    `;
+                } else {
+                    cartItemsContainer.innerHTML = this.cart.map(item => `
+                        <div class="cart-item">
+                            <div class="cart-item-info">
+                                <div class="cart-item-image" style="background-image: url('${item.image}')"></div>
+                                <div class="cart-item-details">
+                                    <h4>${item.name}</h4>
+                                    <div class="cart-item-price">$${item.price.toFixed(2)}</div>
+                                    <div class="cart-item-category">${item.category}</div>
+                                </div>
+                            </div>
+                            <div class="cart-item-controls">
+                                <div class="quantity-controls">
+                                    <button class="quantity-btn" onclick="cartManager.updateQuantity(${item.id}, ${item.quantity - 1})">-</button>
+                                    <span class="quantity-display">${item.quantity}</span>
+                                    <button class="quantity-btn" onclick="cartManager.updateQuantity(${item.id}, ${item.quantity + 1})">+</button>
+                                </div>
+                                <button class="btn btn-outline" onclick="cartManager.removeFromCart(${item.id})">Remove</button>
+                            </div>
+                        </div>
+                    `).join('');
+                }
+
+                this.updateCartSummary();
+            }
+
+            updateCartSummary() {
+                const subtotal = this.cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+                const shipping = 5.00;
+                const tax = subtotal * 0.08; // 8% tax
+                const total = subtotal + shipping + tax;
+
+                document.getElementById('subtotal').textContent = `$${subtotal.toFixed(2)}`;
+                document.getElementById('shipping').textContent = `$${shipping.toFixed(2)}`;
+                document.getElementById('tax').textContent = `$${tax.toFixed(2)}`;
+                document.getElementById('total').textContent = `$${total.toFixed(2)}`;
+            }
+
+            handleCheckout() {
+                if (this.cart.length === 0) {
+                    this.showNotification('Your cart is empty!', 'error');
+                    return;
+                }
+
+                // In a real application, this would redirect to a payment gateway
+                this.showNotification('Proceeding to checkout...', 'success');
+                
+                // Simulate checkout process
+                setTimeout(() => {
+                    this.showNotification('Order placed successfully!', 'success');
+                    this.cart = [];
+                    this.saveCart();
+                    this.renderCart();
+                }, 2000);
+            }
+
+            showNotification(message, type = 'success') {
+                const notification = document.getElementById('notification');
+                notification.textContent = message;
+                notification.className = `notification ${type} show`;
+                
+                setTimeout(() => {
+                    notification.classList.remove('show');
+                }, 3000);
+            }
+        }
+
+        // Initialize Cart Manager
+        const cartManager = new CartManager();
+
+        // Virtual Page Navigation
+        const navLinks = document.querySelectorAll('.nav-link');
+        const virtualPages = document.querySelectorAll('.virtual-page');
+        const featureCards = document.querySelectorAll('.feature-card');
+        
+        // Function to show a specific page
+        function showPage(pageId) {
+            virtualPages.forEach(page => {
+                page.classList.remove('active');
+            });
+            document.getElementById(pageId).classList.add('active');
+            
+            // Update active nav link
+            navLinks.forEach(nav => nav.classList.remove('active'));
+            document.querySelector(`.nav-link[data-page="${pageId.replace('-page', '')}"]`).classList.add('active');
+            
+            // If showing cart page, render cart
+            if (pageId === 'cart-page') {
+                cartManager.renderCart();
+            }
+            
+            // Scroll to top
+            window.scrollTo(0, 0);
+        }
+        
+        // Navigation link event listeners
+        navLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const page = link.getAttribute('data-page');
+                showPage(`${page}-page`);
+            });
+        });
+        
+        // Feature card event listeners
+        featureCards.forEach(card => {
+            card.addEventListener('click', () => {
+                const page = card.getAttribute('data-page');
+                showPage(`${page}-page`);
+            });
+        });
+
+        // Continue shopping button
+        document.addEventListener('click', (e) => {
+            if (e.target.hasAttribute('data-page')) {
+                e.preventDefault();
+                const page = e.target.getAttribute('data-page');
+                showPage(`${page}-page`);
+            }
+        });
+
+        // Modal functionality
+        const loginBtn = document.getElementById('loginBtn');
+        const registerBtn = document.getElementById('registerBtn');
+        const loginModal = document.getElementById('loginModal');
+        const registerModal = document.getElementById('registerModal');
+        const closeModalButtons = document.querySelectorAll('.close-modal');
+        const switchToRegister = document.getElementById('switchToRegister');
+        const switchToLogin = document.getElementById('switchToLogin');
+
+        // Open modals
+        loginBtn.addEventListener('click', () => {
+            loginModal.style.display = 'flex';
+        });
+
+        registerBtn.addEventListener('click', () => {
+            registerModal.style.display = 'flex';
+        });
+
+        // Close modals
+        closeModalButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                loginModal.style.display = 'none';
+                registerModal.style.display = 'none';
+            });
+        });
+
+        // Switch between login and register modals
+        switchToRegister.addEventListener('click', (e) => {
+            e.preventDefault();
+            loginModal.style.display = 'none';
+            registerModal.style.display = 'flex';
+        });
+
+        switchToLogin.addEventListener('click', (e) => {
+            e.preventDefault();
+            registerModal.style.display = 'none';
+            loginModal.style.display = 'flex';
+        });
+
+        // Close modal when clicking outside
+        window.addEventListener('click', (e) => {
+            if (e.target === loginModal) {
+                loginModal.style.display = 'none';
+            }
+            if (e.target === registerModal) {
+                registerModal.style.display = 'none';
+            }
+        });
+
+        // Form submission
+        document.getElementById('loginForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            cartManager.showNotification('Login functionality would be implemented here!');
+            loginModal.style.display = 'none';
+        });
+
+        document.getElementById('registerForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            cartManager.showNotification('Registration functionality would be implemented here!');
+            registerModal.style.display = 'none';
+        });
+
+        // Marketplace filtering
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        const productCards = document.querySelectorAll('.product-card');
+
+        filterButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                // Remove active class from all buttons
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                // Add active class to clicked button
+                button.classList.add('active');
+                
+                const filter = button.getAttribute('data-filter');
+                
+                productCards.forEach(card => {
+                    if (filter === 'all' || card.getAttribute('data-category') === filter) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
